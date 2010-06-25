@@ -10,7 +10,7 @@ public class Question extends OrderedEntity
 {
 	public static enum QuestionType { EGO_ID, EGO, ALTER, ALTER_PAIR };
 
-	private Long studyId;
+	private Long studyId; 
 	private String title;    // Gender
 	protected String citation; // This question originally written by Dr. X from the Institute of Advanced Research.
 	protected String citationOld;
@@ -37,7 +37,6 @@ public class Question extends OrderedEntity
 	private Boolean pageLevelRefuseButton;   // list format only
 	private Boolean dontKnowButton; // single question format only
 	private Boolean refuseButton;   // single question format only
-	private String allOptionString; // if All button is clicked, use this
 	// variables that will be specific to numeric answers, 
 	// and (optionally) limiting them to a range
 	private NumericLimitType minLimitType;
@@ -67,13 +66,12 @@ public class Question extends OrderedEntity
 		type = QuestionType.EGO;
 		askingStyleList = new Boolean(false);
 		otherSpecify = new Boolean(false);
-		noneButton = new Boolean(false);
-		allButton = new Boolean(false);
+		noneButton   = new Boolean(false);
+		allButton    = new Boolean(false);
 		pageLevelDontKnowButton = new Boolean(true);
-		pageLevelRefuseButton = new Boolean(true);
+		pageLevelRefuseButton   = new Boolean(true);
 		dontKnowButton = new Boolean(true);
-		refuseButton = new Boolean(true);
-		allOptionString = "";
+		refuseButton   = new Boolean(true);
 		useIfExpression = "";
 		minLimitType = NumericLimitType.NLT_NONE;
 		minLiteral = 0;
@@ -124,8 +122,7 @@ public class Question extends OrderedEntity
 		c.setPageLevelDontKnowButton(getPageLevelDontKnowButton());
 		c.setPageLevelRefuseButton(getPageLevelRefuseButton());
 		c.setDontKnowButton(getDontKnowButton());
-		c.setRefuseButton(getRefuseButton());
-		c.setAllOptionString(getAllOptionString());		
+		c.setRefuseButton(getRefuseButton());		
 		c.setWithListRange(getWithListRange());
 		c.setListRangeString(getListRangeString());
 		c.setMinListRange(getMinListRange());
@@ -333,6 +330,7 @@ public class Question extends OrderedEntity
 		return(pageLevelRefuseButton);
 	}
 	
+	
 	public void setDontKnowButton ( Boolean dontKnowButton ) {
 		this.dontKnowButton = (dontKnowButton==null) ? new Boolean(true): dontKnowButton;
 	}
@@ -350,15 +348,6 @@ public class Question extends OrderedEntity
 			refuseButton = new Boolean(true);
 		return(refuseButton);
 	}	
-	
-	public void setAllOptionString ( String allOptionString) {
-		this.allOptionString = (allOptionString==null) ? "" : allOptionString;
-	}
-	public String getAllOptionString() {
-		if ( allOptionString==null)
-			allOptionString = "";
-		return(allOptionString);
-	}
 	
 	public void setUseIfExpression ( String useIfExpression ) {
 		this.useIfExpression = (useIfExpression==null) ? "" : useIfExpression;

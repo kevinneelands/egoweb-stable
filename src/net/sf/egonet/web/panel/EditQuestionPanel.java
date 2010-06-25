@@ -346,7 +346,6 @@ public class EditQuestionPanel extends Panel {
 	        question.setPageLevelDontKnowButton(listLimitsPanel.getPageLevelDontKnowButton());
 	        question.setAllButton(listLimitsPanel.getAllButton());
 	        question.setNoneButton(listLimitsPanel.getNoneButton());
-	        question.setAllOptionString(listLimitsPanel.getAllOptionString());
 		}
 	}
 	

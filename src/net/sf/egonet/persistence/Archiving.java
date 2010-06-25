@@ -401,7 +401,7 @@ public class Archiving {
 		addAttribute(questionNode,"pageLevelRefuseButton", question.getPageLevelRefuseButton());
 		addAttribute(questionNode,"dontKnowButton", question.getDontKnowButton());
 		addAttribute(questionNode,"refuseButton", question.getRefuseButton());
-		addAttribute(questionNode,"allOptionString", question.getAllOptionString());		
+		// addAttribute(questionNode,"allOptionString", question.getAllOptionString());	no longer used!
 		aType = question.getAnswerType();
 		if (aType==Answer.AnswerType.NUMERICAL ) {
 			addAttribute(questionNode,"minLimitType", question.getMinLimitTypeDB());
@@ -514,7 +514,7 @@ public class Archiving {
 			question.setPageLevelRefuseButton (attrBool(node,"pageLevelRefuseButton"));
 			question.setDontKnowButton(attrBool(node,"dontKnowButton"));
 			question.setRefuseButton(attrBool(node,"refuseButton"));
-			question.setAllOptionString(attrString(node,"allOptionString"));
+			//   question.setAllOptionString(attrString(node,"allOptionString"));
 		} catch ( java.lang.RuntimeException rte4 ) {
 			question.setNoneButton(new Boolean(false));
 			question.setAllButton(new Boolean(false));
@@ -522,7 +522,7 @@ public class Archiving {
 			question.setPageLevelRefuseButton (new Boolean(true));
 			question.setDontKnowButton(new Boolean(true));
 			question.setRefuseButton(new Boolean(true));
-			question.setAllOptionString(new String(""));
+			// question.setAllOptionString(new String(""));
 		}
 		
 		if ( aType==Answer.AnswerType.DATE || aType==Answer.AnswerType.TIME_SPAN ) {
