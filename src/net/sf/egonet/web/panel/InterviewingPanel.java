@@ -60,9 +60,11 @@ public class InterviewingPanel extends Panel {
 		Form pageButtonsForm = new Form("pageButtonsForm");
 		boolean withDKRefActionButtons = false;
 		List<QuestionOption> listOfOptions;
-		 
-		if ( question.getType() == Question.QuestionType.ALTER &&
-			 question.getAnswerType() == Answer.AnswerType.MULTIPLE_SELECTION ) {
+		Question.QuestionType qType = question.getType();
+		Answer.AnswerType aType = question.getAnswerType();
+		
+		if ( (qType == Question.QuestionType.ALTER || qType==Question.QuestionType.ALTER_PAIR )&&
+			  aType == Answer.AnswerType.MULTIPLE_SELECTION ) {
 			if ( answerFields.size() > 1)
 				withDKRefActionButtons = true;
 		}
@@ -119,13 +121,12 @@ public class InterviewingPanel extends Panel {
 		} else if ( strSkipReason.equals(none)) {
 			selectedOptions.add(none);
 		}
-		if(question.getAnswerType().equals(Answer.AnswerType.MULTIPLE_SELECTION) &&
-		   question.getNoneButton()) {
+		if( aType.equals(Answer.AnswerType.MULTIPLE_SELECTION)  &&  question.getNoneButton()) {
 			allOptions.add(none);
 		}
 		
 		if( !withDKRefActionButtons  && 
-			 question.getType() != Question.QuestionType.EGO_ID &&  
+			 qType != Question.QuestionType.EGO_ID &&  
 			 answerFields.size() > 1 ) {
 			     allOptions.addAll(Lists.newArrayList(dontKnow,refuse));
 		 }
@@ -134,23 +135,6 @@ public class InterviewingPanel extends Panel {
 		add(refDKCheck);
 	
 		
-// ==========================================================================
-// we may want buttons instead of checkboxs for Don't know and Refuse
-//		final String strAllOption = question.getAllOptionString();
-//		
-//		AjaxFallbackLink btnAll = new AjaxFallbackLink("btnAll") {
-//			public void onClick(AjaxRequestTarget target) {
-//				AnswerFormFieldPanel.forceSelectionIfNone(answerFields, strAllOption, 
-//						question.getMaxCheckableBoxes() );
-//				target.addComponent(this);
-//				for ( AnswerFormFieldPanel panel : answerFields) {
-//					target.addComponent(panel);
-//				}
-//			}
-//		};
-//		btnAll.add(new Label("btnAllLabel", "(Set all to " + strAllOption + ") "));
-//		pageButtonsForm.add(btnAll);
-		
 		Long qID = question.getId();
 		if (qID!=null) {
 	  	    listOfOptions = Options.getOptionsForQuestion(qID);
@@ -158,7 +142,7 @@ public class InterviewingPanel extends Panel {
 	    	listOfOptions = new ArrayList<QuestionOption>(1);
 		}
 		
-		lblBtnAll = new Label("lblSetAlls", "Set all to...");
+		lblBtnAll = new Label("lblSetAlls", "Set All Unanswered To...");
 		pageButtonsForm.add(lblBtnAll);
 		
 		RepeatingView rv = new RepeatingView("btnParent");
